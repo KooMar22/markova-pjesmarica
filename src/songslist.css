@@ -1,0 +1,207 @@
+.list {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: #00416A;
+    color: wheat;
+    box-shadow: 0 -5px 10px black;
+    transform: translateX(260%);
+    transition: transform 0.5s ease;
+    border-radius: 10px;
+    z-index: 10;
+}
+
+.list.show {
+    transform: translateX(0);
+}
+
+.loading-div {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: auto;
+    margin-right: 2%;
+    justify-content: center;
+    text-align: center;
+}
+
+.list .header {
+    display: flex;
+    width: 100%;
+    padding: 15px 20px;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+}
+
+.list .header>div {
+    display: flex;
+    align-items: center;
+}
+
+.list .header>div span {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: capitalize;
+    color: wheat;
+    margin-left: 25px;
+}
+
+.genre-selector-div {
+    display: flex;
+    justify-content: center;
+}
+
+.genre-selector {
+    background: darkblue;
+    font-size: 1.45rem;
+    color: wheat;
+    text-align: center;
+    border-radius: 50px;
+    padding: 5px;
+    overflow-y: scroll;
+}
+
+.genre-selector::-webkit-scrollbar {
+    width: 0px;
+}
+
+.genre-selector option {
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.list ul {
+    width: 100%;
+    height: 35dvh;
+    overflow-y: scroll;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+.list ul::-webkit-scrollbar {
+    width: 0px;
+}
+
+.list ul li {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 30px;
+    align-items: center;
+    cursor: pointer;
+    border-bottom: 1mm ridge rgba(255, 255, 255, .6);
+    box-sizing: border-box;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.10);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.list ul li:hover {
+    border: 1mm ridge rgba(255, 255, 255, .6);
+    animation: pulse 2s infinite;
+}
+
+.list ul li .row span {
+    color: wheat;
+    font-size: 0.95rem;
+}
+
+.list ul li .row p {
+    color: wheat;
+    font-size: 0.75rem;
+    font-style: italic;
+}
+
+.list .duration {
+    font-size: 0.95rem;
+    color: wheat;
+}
+
+.list ul li.playing {
+    background: darkblue;
+}
+
+
+@media (orientation: landscape) {
+    /* Landscape (desktop) layout */
+    .list {
+        width: 55%;
+        height: 100dvh;
+        position: relative;
+        top: 0;
+        left: 0;
+        background: transparent;
+        border-radius: 0;
+        border-left: 1.5mm ridge whitesmoke;
+        margin-right: 0;
+    }
+
+    .genre-selector {
+        margin-top: 1%;
+    }
+
+    .list ul {
+        height: 55dvh;
+    }
+}
+
+
+@media (orientation: portrait) {
+    /* Additional layout for portrait mode */
+    .list {
+        width: 100%;
+        background: transparent;
+        z-index: 20;
+    }
+
+    .loading-div {
+        position: absolute;
+    }
+
+    .blurred {
+        -webkit-filter: blur(5px);
+        filter: blur(5px);
+        background: rgba(0, 0, 0, 0.8);
+        transition: filter 0.3s ease;
+    }
+
+    /* Blurring appropriate MediaCard elements when SongsList is open */
+    .blurred .portrait,
+    .blurred .details,
+    .blurred .progressbar,
+    .blurred .timer,
+    .blurred .controls {
+        pointer-events: none;
+        opacity: 0.1;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    /* Remove blur when SongsList is closed */
+    .portrait:not(.blurred),
+    .details:not(.blurred),
+    .progressbar:not(.blurred),
+    .timer:not(.blurred),
+    .controls:not(.blurred) {
+        pointer-events: auto;
+        opacity: 1;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    .list ul {
+        height: 50dvh;
+    }
+}
