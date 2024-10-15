@@ -60,6 +60,7 @@ export const useSongs = (genreId) => {
         enabled: !!genreId, 
         // Keep data in cache for 30 minutes for faster use
         cacheTime: 1000 * 60 * 30, 
+        staleTime: 1000 * 60 * 30,
         // Avoid refetching data when user focuses window
         refetchOnWindowFocus: false, 
     });
