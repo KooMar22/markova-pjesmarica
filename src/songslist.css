@@ -26,6 +26,30 @@
     text-align: center;
 }
 
+@keyframes goldPulse {
+    0% {
+        background-position: -200% 0;
+    }
+
+    50% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.loading {
+    background: linear-gradient(90deg, gold, white 25%, gold 50%, white 75%, gold);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-size: 400% 100%;
+    animation: goldPulse 10s linear infinite;
+    text-align: center;
+}
+
 .list .header {
     display: flex;
     width: 100%;
