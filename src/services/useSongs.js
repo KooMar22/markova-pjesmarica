@@ -2,7 +2,17 @@ import { useQuery } from '@tanstack/react-query';
 import supabase from './supabase';
 
 const fetchSongs = async (genreId) => {
-    // Handles songs fetching from songs table
+    // Fetch all artists according to genreID
+    const { data: artists, error: artistError } = await supabase
+        .from('artists')
+        .select('id')
+        .eq('genre_id', genreId);
+
+    if (artistError) throw new Error(artistError.message);
+
+    const artistIds = artists.map(artist => artist.id);
+
+    // After that, fetch the appropriate songs from their artist_id
     const { data, error } = await supabase
         .from('songs')
         .select(`
@@ -16,15 +26,14 @@ const fetchSongs = async (genreId) => {
                 genre_id
             )
         `)
-        // Order the songs alphabetically in the song list
+        // Filter the songs according to artist_id
+        .in('artist_id', artistIds) 
         .order('name', { ascending: true });
 
     if (error) throw new Error(error.message);
 
-    // Filter songs by genreID
-    return data.filter(song => song.artist?.genre_id === genreId);
+    return data;
 };
-
 
 const preloadDurations = async (songs) => {
     // Preload durations for songs for slightly faster and stable loading
@@ -36,7 +45,7 @@ const preloadDurations = async (songs) => {
                     resolve({
                         ...song,
                         // Add duration to song object
-                        duration: audio.duration || 0, 
+                        duration: audio.duration || 0,
                     });
                 };
             });
@@ -50,18 +59,18 @@ export const useSongs = (genreId) => {
         queryKey: ['songs', genreId],
         queryFn: async () => {
             // If genreId is not provided
-            if (!genreId) return []; 
+            if (!genreId) return [];
             // Fetch the songs
             const songs = await fetchSongs(genreId);
             // Preload song durations
-            return await preloadDurations(songs); 
+            return await preloadDurations(songs);
         },
         // Only run the query if genreId exists
-        enabled: !!genreId, 
+        enabled: !!genreId,
         // Keep data in cache for 30 minutes for faster use
-        cacheTime: 1000 * 60 * 30, 
+        cacheTime: 1000 * 60 * 30,
         staleTime: 1000 * 60 * 30,
         // Avoid refetching data when user focuses window
-        refetchOnWindowFocus: false, 
+        refetchOnWindowFocus: false,
     });
 };
