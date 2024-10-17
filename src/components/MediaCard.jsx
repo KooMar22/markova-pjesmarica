@@ -98,8 +98,8 @@ const MediaCard = ({ musicNumber, setMusicNumber, setOpen, songs, open }) => {
     const controlsClassName = `controls ${open ? "blurred" : ""}`;
 
     // Ensure "centered" class for MediaCard when SongsList is closed on landscape mode
-    // Otherwise, when the list is open, shift the MediaCard to the left
-    const cardClassName = `card ${open ? "shift-left" : "centered"}`
+    // Otherwise, when the list is open, shift the MediaCard to the right
+    const cardClassName = `card ${open ? "shift-right" : "centered"}`
 
     return (
         <div className={cardClassName}>

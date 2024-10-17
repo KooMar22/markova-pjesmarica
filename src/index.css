@@ -112,7 +112,7 @@ ul {
   }
 
   main {
-    /* Make MediaCard and songsList be one to another */
+    /* Make MediaCard and SongsList be one to another */
     flex-direction: row;
     justify-content: space-between;
     height: 75dvh;
