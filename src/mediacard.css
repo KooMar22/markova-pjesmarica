@@ -169,3 +169,9 @@
         margin: auto;
     }
 }
+
+@media (orientation: portrait) {
+    .card .portrait {
+        margin-top: 25%;
+    }
+}
