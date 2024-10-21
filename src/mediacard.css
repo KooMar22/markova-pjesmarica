@@ -4,7 +4,6 @@
     overflow: hidden;
     padding: 25px;
     box-sizing: border-box;
-    order: 2;
 }
 
 .card .nav {
@@ -154,12 +153,12 @@
     
     /* Center the MediaCard when SongsList is closed */
     .centered {
-        transform: translateX(-80%);
+        transform: translateX(80%);
         transition: transform 0.5s ease;
     }
 
-    /* Shift the MediaCard to the right when SongsList is open */
-    .shift-right {
+    /* Shift the MediaCard to the left when SongsList is open */
+    .shift-left {
         transform: translateX(0)
     }
 

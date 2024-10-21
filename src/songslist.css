@@ -6,11 +6,10 @@
     background: #00416A;
     color: wheat;
     box-shadow: 0 -5px 10px black;
-    transform: translateX(-260%);
+    transform: translateX(260%);
     transition: transform 0.5s ease;
     border-radius: 10px;
     z-index: 10;
-    order: 1;
 }
 
 .list.show {
@@ -26,7 +25,7 @@
     margin-left: 2%;
     justify-content: center;
     text-align: center;
-    z-index: 10;
+    z-index: 20,
 }
 
 @keyframes goldPulse {
@@ -173,7 +172,7 @@
         left: 0;
         background: transparent;
         border-radius: 0;
-        border-right: 1.5mm ridge whitesmoke;
+        border-left: 1.5mm ridge whitesmoke;
         margin-right: 0;
     }
 
