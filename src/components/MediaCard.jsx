@@ -134,7 +134,14 @@ const MediaCard = ({ musicNumber, setMusicNumber, setOpen, songs, open }) => {
 
             <div className={progressbarClassName}>
                 <input type="range" min={0} max={duration} value={currentTime}
-                    onChange={changeCurrentTime} />
+                    onChange={changeCurrentTime}
+                    style={{
+                        background: `linear-gradient(to right, 
+                            #0d1b4d ${((currentTime / duration) * 65) || 0}%,
+                            #0e4c92 ${((currentTime / duration) * 95) || 0}%, 
+                            white ${((currentTime / duration) * 100) || 0}%)`
+                    }}
+                />
             </div>
 
             <div className={timerClassName}>
