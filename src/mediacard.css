@@ -69,6 +69,8 @@
 }
 
 .card .progressbar input::-webkit-slider-thumb {
+    width: 12px;
+    height: 12px;
     appearance: none;
     -webkit-appearance: none;
     border-radius: 50%;
@@ -76,6 +78,17 @@
 }
 
 .card .progressbar input::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    appearance: none;
+    -webkit-appearance: none;
+    border-radius: 50%;
+    background: #1e6fba;
+}
+
+.card .progressbar input::-ms-thumb {
+    width: 12px;
+    height: 12px;
     appearance: none;
     -webkit-appearance: none;
     border-radius: 50%;
