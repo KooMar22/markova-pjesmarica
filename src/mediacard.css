@@ -59,6 +59,8 @@
 
 .card .progressbar {
     margin-top: 15px;
+    --thumb-size: 12px;
+    --thumb-color: #0e4c92;
 }
 
 .card .progressbar input {
@@ -68,15 +70,43 @@
     outline: none;
 }
 
-.card .progressbar input::-webkit-slider-thumb,
-.card .progressbar input::-moz-range-thumb,
-.card .progressbar input::-ms-thumb {
-    width: 12px;
-    height: 12px;
-    appearance: none;
-    -webkit-appearance: none;
+.card .progressbar input::-webkit-slider-thumb {
+    width: var(--thumb-size);
+    height: var(--thumb-size);
     border-radius: 50%;
-    background: #1e6fba;
+    background: var(--thumb-color);
+    cursor: pointer;
+    appearance: none;
+}
+
+.card .progressbar input::-webkit-slider-thumb:hover {
+    background: #0d1b4d;
+}
+
+.card .progressbar input::-moz-range-thumb {
+    width: var(--thumb-size);
+    height: var(--thumb-size);
+    border-radius: 50%;
+    background: var(--thumb-color);
+    cursor: pointer;
+    appearance: none;
+}
+
+.card .progressbar input::-moz-range-thumb:hover {
+    background: #0d1b4d;
+}
+
+.card .progressbar input::-ms-thumb {
+    width: var(--thumb-size);
+    height: var(--thumb-size);
+    border-radius: 50%;
+    background: var(--thumb-color);
+    cursor: pointer;
+    appearance: none;
+}
+
+.card .progressbar input::-ms-thumb {
+    background: #0d1b4d;
 }
 
 .card .timer {
