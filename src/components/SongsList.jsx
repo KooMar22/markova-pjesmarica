@@ -44,7 +44,11 @@ const SongsList = ({ open, musicNumber, setMusicNumber, setSongs }) => {
         <div className="loading-div">
             <p className="loading">Loading songs...
                 <br />
+                <br />
                 It may take a while if loading genre for the first time.
+                <br />
+                <br />
+                When loaded, you have to select a song to play it.
             </p>
         </div>
     );
