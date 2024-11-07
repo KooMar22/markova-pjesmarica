@@ -16,12 +16,25 @@ const SongsList = ({ open, musicNumber, setMusicNumber, setSongs }) => {
 
     useEffect(() => {
         if (songs) {
-            // Update the songs
+            // Update the songs list
             setSongs(songs);
             // Load songs without their duration initially
             setLoadedSongs(songs);
         }
     }, [songs, setSongs]);
+
+    useEffect(() => {
+        if (musicNumber !== null && !loadedSongs[musicNumber]?.duration) {
+            // Lazy load metadata for the selected song if duration is not already loaded
+            const loadMetadata = async () => {
+                const updatedSong = await loadSongMetadata(loadedSongs[musicNumber]);
+                setLoadedSongs((prevSongs) =>
+                    prevSongs.map((song, i) => (i === musicNumber ? updatedSong : song))
+                );
+            };
+            loadMetadata();
+        }
+    }, [musicNumber, loadedSongs]);
 
     // Pause playback and reset the song number to null when the genre changes
     const handleGenreChange = (e) => {
@@ -31,17 +44,19 @@ const SongsList = ({ open, musicNumber, setMusicNumber, setSongs }) => {
         setMusicNumber(null);
     };
 
-    const handleSongSelect = async (index) => {
+    const handleSongSelect = (index) => {
         setMusicNumber(index);
-        // Lazy load metadata if not already loaded
+        // Check if the song metadata is already loaded and load it if it is not
         if (!loadedSongs[index]?.duration) {
-            const updatedSong = await loadSongMetadata(loadedSongs[index]);
-            setLoadedSongs((prevSongs) =>
-                prevSongs.map((song, i) => (i === index ? updatedSong : song))
-            );
+            loadSongMetadata(loadedSongs[index]).then((updatedSong) => {
+                setLoadedSongs((prevSongs) =>
+                    prevSongs.map((song, i) => (i === index ? updatedSong : song))
+                );
+            });
         }
     };
 
+    // Check for genre and song loading states
     if (loadingGenres) return (
         <div className="loading-div">
             <p className="loading">Loading genres...
@@ -93,21 +108,22 @@ const SongsList = ({ open, musicNumber, setMusicNumber, setSongs }) => {
             </div>
 
             <ul>
-                {loadedSongs && loadedSongs.length > 0 && (
-                    loadedSongs.map((song, index) => (
-                        <li key={song.id} 
-                            onClick={() => handleSongSelect(index)}
-                            className={`${musicNumber === index ? "playing" : ""}`}>
-                            <div className="row">
-                                <span>{song.name}</span>
-                                <p>{song.artist ? song.artist.name : "Unknown Artist"}</p>
-                            </div>
-                            <span className="duration">
-                                {song.duration ? timer(song.duration) : ""}
-                            </span>
-                        </li>
-                    ))
-                )}
+                {loadedSongs && loadedSongs.length > 0 && loadedSongs.map((song, index) => (
+                    <li
+                        key={song.id}
+                        onClick={() => handleSongSelect(index)}
+                        className={`${musicNumber === index ? "playing" : ""}`}
+                    >
+                        <div className="row">
+                            <span>{song.name}</span>
+                            <p>{song.artist ? song.artist.name : "Unknown Artist"}</p>
+                        </div>
+                        <span className="duration">
+                            {/* Show duration for all loaded songs*/}
+                            {song.duration ? timer(song.duration) : ""}
+                        </span>
+                    </li>
+                ))}
             </ul>
         </div>
     );
