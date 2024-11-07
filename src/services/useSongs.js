@@ -27,30 +27,12 @@ const fetchSongs = async (genreId) => {
             )
         `)
         // Filter the songs according to artist_id
-        .in('artist_id', artistIds) 
+        .in('artist_id', artistIds)
         .order('name', { ascending: true });
 
     if (error) throw new Error(error.message);
 
     return data;
-};
-
-const preloadDurations = async (songs) => {
-    // Preload durations for songs for slightly faster and stable loading
-    return await Promise.all(
-        songs.map(song => {
-            return new Promise(resolve => {
-                const audio = new Audio(song.file_path);
-                audio.onloadedmetadata = () => {
-                    resolve({
-                        ...song,
-                        // Add duration to song object
-                        duration: audio.duration || 0,
-                    });
-                };
-            });
-        })
-    );
 };
 
 export const useSongs = (genreId) => {
@@ -60,10 +42,8 @@ export const useSongs = (genreId) => {
         queryFn: async () => {
             // If genreId is not provided
             if (!genreId) return [];
-            // Fetch the songs
-            const songs = await fetchSongs(genreId);
-            // Preload song durations
-            return await preloadDurations(songs);
+            // Else, fetch the songs
+            return await fetchSongs(genreId);
         },
         // Only run the query if genreId exists
         enabled: !!genreId,

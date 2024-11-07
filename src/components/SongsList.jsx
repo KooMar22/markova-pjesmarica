@@ -3,11 +3,13 @@ import "../songslist.css";
 import timer from "../utils/timer";
 import { useGenres } from "../services/useGenres";
 import { useSongs } from "../services/useSongs";
+import { loadSongMetadata } from "../services/loadSongMetadata";
 
 const SongsList = ({ open, musicNumber, setMusicNumber, setSongs }) => {
-    // Handle selected genres state
+    // Handle selected genres and loaded songs state
     const [selectedGenre, setSelectedGenre] = useState(null);
-    
+    const [loadedSongs, setLoadedSongs] = useState([]);
+
     // Fetch genres and songs
     const { data: genres, isLoading: loadingGenres } = useGenres();
     const { data: songs, isLoading: loadingSongs, error: songsError } = useSongs(selectedGenre);
@@ -16,6 +18,8 @@ const SongsList = ({ open, musicNumber, setMusicNumber, setSongs }) => {
         if (songs) {
             // Update the songs
             setSongs(songs);
+            // Load songs without their duration initially
+            setLoadedSongs(songs);
         }
     }, [songs, setSongs]);
 
@@ -27,9 +31,15 @@ const SongsList = ({ open, musicNumber, setMusicNumber, setSongs }) => {
         setMusicNumber(null);
     };
 
-    const handleSongSelect = (index) => {
-        // Set the current song number
-        setMusicNumber(index); 
+    const handleSongSelect = async (index) => {
+        setMusicNumber(index);
+        // Lazy load metadata if not already loaded
+        if (!loadedSongs[index]?.duration) {
+            const updatedSong = await loadSongMetadata(loadedSongs[index]);
+            setLoadedSongs((prevSongs) =>
+                prevSongs.map((song, i) => (i === index ? updatedSong : song))
+            );
+        }
     };
 
     if (loadingGenres) return (
@@ -69,9 +79,9 @@ const SongsList = ({ open, musicNumber, setMusicNumber, setSongs }) => {
             {/* Genre selection dropdown */}
             <div className="genre-selector-div">
                 <select className="genre-selector"
-                    onChange={handleGenreChange} 
+                    onChange={handleGenreChange}
                     // Set the value to selected genre
-                    value={selectedGenre || ""} 
+                    value={selectedGenre || ""}
                 >
                     <option value="" disabled>Select a Genre</option>
                     {genres && genres.map((genre) => (
@@ -82,10 +92,9 @@ const SongsList = ({ open, musicNumber, setMusicNumber, setSongs }) => {
                 </select>
             </div>
 
-
             <ul>
-                {songs && songs.length > 0 && (
-                    songs.map((song, index) => (
+                {loadedSongs && loadedSongs.length > 0 && (
+                    loadedSongs.map((song, index) => (
                         <li key={song.id} 
                             onClick={() => handleSongSelect(index)}
                             className={`${musicNumber === index ? "playing" : ""}`}>
@@ -93,11 +102,13 @@ const SongsList = ({ open, musicNumber, setMusicNumber, setSongs }) => {
                                 <span>{song.name}</span>
                                 <p>{song.artist ? song.artist.name : "Unknown Artist"}</p>
                             </div>
-                            <span className="duration">{timer(song.duration)}</span>
+                            <span className="duration">
+                                {song.duration ? timer(song.duration) : ""}
+                            </span>
                         </li>
                     ))
                 )}
-            </ul>          
+            </ul>
         </div>
     );
 };
