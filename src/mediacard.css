@@ -46,9 +46,8 @@
     color: lightgrey;
     font-size: 1.2rem;
     font-weight: bold;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: normal;
+    max-height: 2.5rem;
 }
 
 .card .details .artist {

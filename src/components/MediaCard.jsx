@@ -8,7 +8,6 @@ const MediaCard = ({ musicNumber, setMusicNumber, setOpen, songs, open }) => {
     const {
         audioRef,
         play,
-        volume,
         setVolume,
         currentTime,
         duration,
@@ -19,18 +18,8 @@ const MediaCard = ({ musicNumber, setMusicNumber, setOpen, songs, open }) => {
         handleRepeat
     } = useAudioPlayer(50, songs, musicNumber, setMusicNumber);
 
-    const [showVolume, setShowVolume] = useState(false); 
     const [isMuted, setIsMuted] = useState(false);
-    const [isPortrait, setIsPortrait] =
-        useState(() => window.matchMedia("(orientation: portrait)").matches);
     const [artistImage, setArtistImage] = useState("");
-
-    const toggleVolume = () => setShowVolume(prev => !prev);
-
-    const handleTouchStart = (e) => {
-        // Prevent default behavior on touch
-        e.preventDefault(); 
-    };
 
     const handleMute = () => {
         setIsMuted(prev => {
@@ -49,30 +38,12 @@ const MediaCard = ({ musicNumber, setMusicNumber, setOpen, songs, open }) => {
         });
     };
 
-    const handleVolumeChange = (e) => {
-        const newVolume = Math.round(Number(e.target.value));
-        setVolume(newVolume);
-        if (audioRef.current) {
-            audioRef.current.volume = newVolume / 100;
-        }
-    };
-
-    useEffect(() => {
-        const handleOrientationChange = () => {
-                    setIsPortrait(window.matchMedia("(orientation: portrait)").matches);
-                };
-
-        window.addEventListener("resize", handleOrientationChange);
-        return () => {
-            window.removeEventListener("resize", handleOrientationChange);
-        };
-    }, [audioRef, setVolume]);
 
     // Define songs info
     const currentSong = songs[musicNumber] || {};
     const artistPortrait = currentSong.artist ? currentSong.artist.portrait : "";
     const songName = currentSong.name || "Unknown Title";
-    const artistName = currentSong.artist ? currentSong.artist.name : "Unknown Artist"; 
+    const artistName = currentSong.artist ? currentSong.artist.name : "Unknown Artist";
     const songFilePath = currentSong.file_path || "";
 
     // Set the artist image initially and handle potential error
@@ -81,13 +52,13 @@ const MediaCard = ({ musicNumber, setMusicNumber, setOpen, songs, open }) => {
             setArtistImage(artistPortrait);
         } else {
             // Use fallback image if no artist portrait is found
-            setArtistImage(fallbackImage); 
+            setArtistImage(fallbackImage);
         }
     }, [artistPortrait]);
 
     const handleImageError = () => {
         // Fallback on error
-        setArtistImage(fallbackImage); 
+        setArtistImage(fallbackImage);
     };
 
     // Apply "blurred" class when SongsList is open in portrait mode
@@ -126,7 +97,7 @@ const MediaCard = ({ musicNumber, setMusicNumber, setOpen, songs, open }) => {
                     onError={handleImageError}
                 />
             </div>
-            
+
             <div className={detailsClassName}>
                 <p className="title">{songName}</p>
                 <p className="artist">{artistName}</p>
@@ -150,7 +121,7 @@ const MediaCard = ({ musicNumber, setMusicNumber, setOpen, songs, open }) => {
             </div>
 
             <div className={controlsClassName}>
-                <div className="icon-container">    
+                <div className="icon-container">
                     <i className="material-symbols-outlined" onClick={handleRepeat}>
                         {repeat === "autoplay" ? "autoplay" :
                             repeat === "repeat" ? "repeat" : "shuffle"}
@@ -170,35 +141,11 @@ const MediaCard = ({ musicNumber, setMusicNumber, setOpen, songs, open }) => {
                 <i className="material-symbols-outlined" id="next"
                     onClick={() => handleNextPrev(1)}>skip_next
                 </i>
-                {/* Show mute button in portrait mode, volume button in landscape mode */}
-                    {isPortrait ? (
-                        <i className="material-symbols-outlined" onClick={handleMute}>
-                            {isMuted ? "volume_off" : "volume_up"}
-                        </i>
-                    ) : (
-                        <div>
-                            <i className="material-symbols-outlined" onClick={toggleVolume}>
-                                volume_up
-                            </i>
-                            {showVolume && (
-                                <div className="volume">
-                                    <i className="material-symbols-outlined" onClick={handleMute}>
-                                        {isMuted ? "volume_off" : "volume_up"}
-                                    </i>
-                                    <input
-                                        type="range"
-                                        min={0}
-                                        max={100}
-                                        value={volume}
-                                        onChange={handleVolumeChange}
-                                        onTouchStart={handleTouchStart}
-                                    />
-                                    <span>{volume}</span>
-                                </div>
-                            )}
-                        </div>
-                    )}
-                </div>
+                {/* Show only mute/unmute button */}
+                <i className="material-symbols-outlined" onClick={handleMute}>
+                    {isMuted ? "volume_off" : "volume_up"}
+                </i>
+            </div>
 
             <audio 
                 src={songFilePath}
