@@ -43,7 +43,7 @@
 }
 
 .card .details .title {
-    color: lightgrey;
+    color: rgb(211, 211, 211);
     font-size: 1.2rem;
     font-weight: bold;
     white-space: normal;
@@ -51,7 +51,7 @@
 }
 
 .card .details .artist {
-    color: lightgrey;
+    color: rgb(211, 211, 211);
     font-weight: bold;
     font-style: italic;
 }
@@ -59,7 +59,7 @@
 .card .progressbar {
     margin-top: 15px;
     --thumb-size: 12px;
-    --thumb-color: #0e4c92;
+    --thumb-color: rgb(14, 76, 146);
 }
 
 .card .progressbar input {
@@ -79,7 +79,7 @@
 }
 
 .card .progressbar input::-webkit-slider-thumb:hover {
-    background: #0d1b4d;
+    background: rgb(13, 27, 77);
 }
 
 .card .progressbar input::-moz-range-thumb {
@@ -92,7 +92,7 @@
 }
 
 .card .progressbar input::-moz-range-thumb:hover {
-    background: #0d1b4d;
+    background: rgb(13, 27, 77);
 }
 
 .card .progressbar input::-ms-thumb {
@@ -105,7 +105,7 @@
 }
 
 .card .progressbar input::-ms-thumb {
-    background: #0d1b4d;
+    background: rgb(13, 27, 77);
 }
 
 .card .timer {
@@ -113,7 +113,7 @@
     justify-content: space-between;
     width: 100%;
     font-size: 0.8rem;
-    color: lightgrey;
+    color: rgb(211, 211, 211);
 }
 
 .card .controls {
@@ -135,7 +135,7 @@
     display: flex;
     width: 3.2rem;
     height: 3.2rem;
-    background: linear-gradient(white 0%, lightgrey, 100%);
+    background: linear-gradient(rgb(255, 255, 255) 0%, rgb(211, 211, 211), 100%);
     border-radius: 50%;
     justify-content: center;
     align-items: center;
@@ -148,7 +148,7 @@
     height: 2.5rem;
     width: 2.5rem;
     border-radius: inherit;
-    background: linear-gradient(#0e4c92, #1e6fba);
+    background: linear-gradient(rgb(14, 76, 146), rgb(30, 111, 186));
 }
 
 .card .controls .play i {
