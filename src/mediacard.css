@@ -159,40 +159,6 @@
     position: absolute;
 }
 
-.card .controls .volume {
-    display: flex;
-    justify-content: space-around;
-    width: 95%;
-    height: 10px;
-    z-index: 10;
-    position: absolute;
-    background: transparent;
-    top: 50px;
-    bottom: -10%;
-    left: 0;
-    padding: 15px;
-    transition: bottom 0.3s linear;
-    gap: 10px;
-}
-
-.card .controls .volume i {
-    align-self: center;
-}
-
-.card .controls .volume.show {
-    bottom: -10px;
-}
-
-.card .controls .volume input {
-    width: 70%;
-    height: 4px;
-}
-
-.card .controls .volume span {
-    align-self: center;
-}
-
-
 @media (orientation: landscape) {
     /* Landscape (desktop) layout */
     
