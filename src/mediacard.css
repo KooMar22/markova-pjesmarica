@@ -180,6 +180,59 @@
     }
 }
 
+@media (max-width: 800px) and (orientation: landscape) {
+    /* Landscape mode for mobile devices */
+    .card {
+        height: 100dvh;
+        padding: 10px;
+    }
+
+    .card .nav span {
+        font-size: 0.8rem;
+    }
+
+    .card .portrait img {
+        width: 50%;
+        height: auto;
+        margin: 0 auto;
+        margin-top: 0;
+    }
+
+    .card .details .artist {
+        font-size: 0.8rem;
+    }
+
+    .card .details .title {
+        font-size: 0.8rem;
+    }
+
+    .card .controls .icon-container i {
+        font-size: 1.7rem;
+    }
+
+    .card .controls #prev,
+    .card .controls #next {
+        font-size: 1.7rem;
+    }
+
+    .card .controls .play::before {
+        width: 2rem;
+        height: 2rem;
+    }
+
+    .card .controls .play i {
+        font-size: 1.7rem;
+    }
+
+    .card .controls .icon-container i.volume_up {
+        font-size: 1.7rem;
+    }
+
+    .card .controls .icon-container i.volume_off {
+        font-size: 1.7rem;
+    }
+}
+
 @media (orientation: portrait) {
     .card .portrait {
         margin-top: 35%;
