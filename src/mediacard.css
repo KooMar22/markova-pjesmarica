@@ -180,7 +180,7 @@
     }
 }
 
-@media (max-width: 800px) and (orientation: landscape) {
+@media (max-width: 1284px) and (orientation: landscape) {
     /* Landscape mode for mobile devices */
     .card {
         height: 100dvh;
@@ -192,7 +192,7 @@
     }
 
     .card .portrait img {
-        width: 50%;
+        width: 30%;
         height: auto;
         margin: 0 auto;
         margin-top: 0;
