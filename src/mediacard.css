@@ -116,20 +116,6 @@
     color: rgb(211, 211, 211);
 }
 
-@keyframes controlsPulse {
-    0% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.2);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
-
 .card .controls {
     display: flex;
     justify-content: space-between;
@@ -138,10 +124,6 @@
     margin-top: 20px;
     margin-bottom: 30px;
     position: relative;
-}
-
-.card .controls i:hover {
-    animation: controlsPulse 2s infinite;
 }
 
 .card .controls #prev,
