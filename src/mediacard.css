@@ -16,7 +16,7 @@
     margin-left: 5%;
     margin-right: 10%;
     text-align: center;
-    font-size: calc(.3em + 1vw)
+    font-size: calc(.4em + 1vw)
 }
 
 .card .portrait {
@@ -30,8 +30,8 @@
 }
 
 .card .portrait img {
-    width: calc(5em + 1vw);
-    height: calc(5em + 1vw);
+    width: calc(5.5em + 1vw);
+    height: calc(5.5em + 1vw);
     object-fit: cover;
     justify-content: center;
     align-content: center;
@@ -53,7 +53,7 @@
 
 .card .details .artist {
     color: rgb(211, 211, 211);
-    font-size: calc(.3em + 1vw);
+    font-size: calc(.37em + 1vw);
     font-weight: bold;
     font-style: italic;
 }
@@ -114,7 +114,7 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    font-size: calc(.1em + 1vw);
+    font-size: calc(.15em + 1vw);
     color: rgb(211, 211, 211);
 }
 
@@ -130,13 +130,13 @@
 
 .card .controls #prev,
 .card .controls #next {
-    font-size: calc(1.9em + 1vw);
+    font-size: calc(2em + 1vw);
 }
 
 .card .controls .play {
     display: flex;
     width: 3.2rem;
-    height: calc(2.5em + 1vw);
+    height: calc(2.7em + 1vw);
     background: linear-gradient(rgb(255, 255, 255) 0%, rgb(211, 211, 211), 100%);
     border-radius: 50%;
     justify-content: center;
@@ -147,8 +147,8 @@
 .card .controls .play::before {
     content: "";
     position: absolute;
-    height: calc(1.8em + 1vw);
-    width: calc(1.8em + 1vw);
+    height: calc(1.9em + 1vw);
+    width: calc(1.9em + 1vw);
     border-radius: inherit;
     background: linear-gradient(rgb(14, 76, 146), rgb(30, 111, 186));
 }
