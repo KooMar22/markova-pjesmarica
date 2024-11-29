@@ -1,17 +1,16 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const lockOrientation = async () => {
-        if (screen.orientation && screen.orientation.lock) {
-            try {
-                await screen.orientation.lock("portrait");
-                console.log("Orientation locked to portrait.");
-            } catch (error) {
-                console.warn("Could not lock the orientation:", error);
-            }
-        } else {
-            console.warn("Screen Orientation API is not supported on this browser.");
+    const preventOrientationChange = () => {
+        const orientation = window.innerWidth / window.innerHeight;
+
+        if (orientation > 1 && window.innerWidth < 800) {  
+            document.body.style.transform = "rotate(0deg)";
+            document.body.style.webkitTransform = "rotate(0deg)";
+            window.scrollTo(0, 0);
         }
     };
-    document.addEventListener("click", () => {
-        lockOrientation();
-    });
+
+    window.addEventListener("orientationchange", preventOrientationChange);
+    window.addEventListener("resize", preventOrientationChange);
+
+    preventOrientationChange();
 });
