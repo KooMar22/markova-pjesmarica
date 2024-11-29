@@ -188,7 +188,7 @@
     }
 }
 
-@media ((max-width: 1284px) and (orientation: portrait)) {
+@media ((max-width: 1284px) and (orientation: landscape)) {
     .card .portrait {
         margin-top: 3%;
     }
