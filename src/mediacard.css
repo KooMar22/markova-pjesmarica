@@ -44,7 +44,6 @@
 
 .card .details .title {
     color: rgb(211, 211, 211);
-    font-size: 1.2rem;
     font-weight: bold;
     white-space: normal;
     max-height: 2.5rem;
@@ -112,7 +111,6 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    font-size: 0.8rem;
     color: rgb(211, 211, 211);
 }
 
@@ -126,10 +124,7 @@
     position: relative;
 }
 
-.card .controls #prev,
-.card .controls #next {
-    font-size: 2.5rem;
-}
+
 
 .card .controls .play {
     display: flex;
