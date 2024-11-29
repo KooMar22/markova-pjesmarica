@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const isMobile = () => window.innerWidth <= 768; // Provera za mobilne uređaje (768px je granica)
+    const isMobile = () => window.innerWidth <= 768;
 
     const checkOrientation = () => {
         const orientation = screen.orientation?.type || window.screen.orientation || null;
