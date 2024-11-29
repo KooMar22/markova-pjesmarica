@@ -1,11 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const isMobile = () => window.innerWidth <= 768;
+    const isMobile = () => {
+        const aspectRatio = window.innerWidth / window.innerHeight;
+        return aspectRatio < 1;
+    };
 
     const checkOrientation = () => {
-        const orientation = screen.orientation?.type || window.screen.orientation || null;
+        const aspectRatio = window.innerWidth / window.innerHeight;
         const message = document.getElementById("orientation-message");
 
-        if (isMobile() && orientation?.includes("landscape")) {
+        if (aspectRatio > 1 && isMobile()) {
             if (!message) {
                 const alert = document.createElement("div");
                 alert.id = "orientation-message";
