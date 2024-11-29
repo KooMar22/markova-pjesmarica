@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const isMobile = () => {
         const aspectRatio = window.innerWidth / window.innerHeight;
-        return aspectRatio < 1;
+        return aspectRatio <= 1;
     };
 
     const checkOrientation = () => {
@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 alert.style.justifyContent = "center";
                 alert.style.alignItems = "center";
                 alert.style.zIndex = "1000";
+                alert.style.textAlign = "center";
                 alert.innerHTML =
                     "<p>Please rotate your device back to portrait (vertical) mode.</p>";
                 document.body.appendChild(alert);
@@ -36,9 +37,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
     checkOrientation();
 
-    if ("onchange" in screen.orientation) {
-        screen.orientation.onchange = checkOrientation;
-    } else {
-        window.addEventListener("resize", checkOrientation);
-    }
+    window.addEventListener("resize", checkOrientation);
 });
