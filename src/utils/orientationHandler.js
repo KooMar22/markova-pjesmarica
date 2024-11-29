@@ -1,9 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const isMobile = () => window.innerWidth <= 768; // Provera za mobilne uređaje (768px je granica)
+
     const checkOrientation = () => {
         const orientation = screen.orientation?.type || window.screen.orientation || null;
         const message = document.getElementById("orientation-message");
 
-        if (orientation?.includes("landscape")) {
+        if (isMobile() && orientation?.includes("landscape")) {
             if (!message) {
                 const alert = document.createElement("div");
                 alert.id = "orientation-message";
