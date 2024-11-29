@@ -4,7 +4,7 @@
     bottom: 0;
     left: 0;
     background: rgb(0, 65, 106);
-    color: wheat;
+    color: rgb(245, 222, 179);
     box-shadow: 0 -5px 10px rgb(0, 0, 0);
     transform: translateX(260%);
     transition: transform 0.5s ease;
@@ -69,7 +69,7 @@
 }
 
 .list .header>div span {
-    font-size: 1.5rem;
+    font-size: calc(.8em + 1vw);
     font-weight: bold;
     text-transform: capitalize;
     color: rgb(245, 222, 179);
@@ -83,7 +83,7 @@
 
 .genre-selector {
     background: rgb(0, 0, 139);
-    font-size: 1.45rem;
+    font-size: calc(.7em + 1vw);
     box-shadow: 5px 5px 3px 3px rgb(2, 2, 95);
     color: rgb(245, 222, 179);
     text-align: center;
@@ -98,7 +98,7 @@
 
 .genre-selector option {
     cursor: pointer;
-    font-size: 1rem;
+    font-size: calc(.2em + 1vw);
 }
 
 .list ul {
@@ -145,17 +145,17 @@
 
 .list ul li .row span {
     color: rgb(245, 222, 179);
-    font-size: 0.95rem;
+    font-size: calc(.3em + 1vw);
 }
 
 .list ul li .row p {
     color: rgb(245, 222, 179);
-    font-size: 0.75rem;
+    font-size: calc(.1em + 1vw);
     font-style: italic;
 }
 
 .list .duration {
-    font-size: 0.95rem;
+    font-size: calc(.3em + 1vw);
     color: rgb(245, 222, 179);
 }
 
