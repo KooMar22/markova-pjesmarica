@@ -82,8 +82,9 @@
 }
 
 .genre-selector {
-    background: darkblue;
+    background: rgb(0, 0, 139);
     font-size: 1.45rem;
+    box-shadow: 5px 5px 3px 3px rgb(2, 2, 95);
     color: rgb(245, 222, 179);
     text-align: center;
     border-radius: 50px;
