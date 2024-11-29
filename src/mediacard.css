@@ -187,9 +187,3 @@
         margin-top: 35%;
     }
 }
-
-@media ((max-width: 1284px) and (orientation: landscape)) {
-    .card .portrait {
-        margin-top: 3%;
-    }
-}
