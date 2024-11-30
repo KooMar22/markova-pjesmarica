@@ -41,13 +41,13 @@ const SongsList = ({ open, musicNumber, setMusicNumber, setSongs }) => {
 
     // Scroll to current song
     useEffect(() => {
-        if (musicNumber !== null && songRefs.current[musicNumber]) {
+        if (open && musicNumber !== null && songRefs.current[musicNumber]) {
             songRefs.current[musicNumber].scrollIntoView({
                 behavior: "smooth",
                 block: "nearest",
             });
         }
-    }, [musicNumber]);
+    }, [open, musicNumber]);
 
     // Pause playback and reset the song number to null when the genre changes
     const handleGenreChange = (e) => {
