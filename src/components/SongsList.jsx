@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "../songslist.css";
 import timer from "../utils/timer";
 import { useGenres } from "../services/useGenres";
@@ -13,6 +13,9 @@ const SongsList = ({ open, musicNumber, setMusicNumber, setSongs }) => {
     // Fetch genres and songs
     const { data: genres, isLoading: loadingGenres } = useGenres();
     const { data: songs, isLoading: loadingSongs, error: songsError } = useSongs(selectedGenre);
+
+    // Create a ref for each song
+    const songRefs = useRef([]);
 
     useEffect(() => {
         if (songs) {
@@ -35,6 +38,16 @@ const SongsList = ({ open, musicNumber, setMusicNumber, setSongs }) => {
             loadMetadata();
         }
     }, [musicNumber, loadedSongs]);
+
+    // Scroll to current song
+    useEffect(() => {
+        if (musicNumber !== null && songRefs.current[musicNumber]) {
+            songRefs.current[musicNumber].scrollIntoView({
+                behavior: "smooth",
+                block: "nearest",
+            });
+        }
+    }, [musicNumber]);
 
     // Pause playback and reset the song number to null when the genre changes
     const handleGenreChange = (e) => {
@@ -111,6 +124,7 @@ const SongsList = ({ open, musicNumber, setMusicNumber, setSongs }) => {
                 {loadedSongs && loadedSongs.length > 0 && loadedSongs.map((song, index) => (
                     <li
                         key={song.id}
+                        ref={(element) => (songRefs.current[index] = element)}
                         onClick={() => handleSongSelect(index)}
                         className={`${musicNumber === index ? "playing" : ""}`}
                     >
