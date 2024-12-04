@@ -184,7 +184,7 @@
 
 @media (orientation: portrait) {
     .card .nav span {
-        font-size: calc(1em + 1vw)
+        font-size: calc(1.3em + 1vw)
     }
     
     .card .portrait {
@@ -192,32 +192,33 @@
     }
 
     .card .portrait img {
-        width: calc(7.5em + 1vw);
-        height: calc(7.5em + 1vw);
+        width: calc(7.0em + 1vw);
+        height: calc(7.0em + 1vw);
     }
 
     .card .details .title {
-        font-size: calc(1em + 1vw);
+        font-size: calc(1.5em + 1vw);
     }
 
     .card .details .artist {
-        font-size: calc(.77em + 1vw);
+        font-size: calc(1.25em + 1vw);
     }
 
     .card .timer {
         font-size: calc(.55em + 1vw);
     }
 
-    .card .controls #next, #prev {
-        font-size: calc(3em + 1vw);
+    .card .controls #prev,
+    .card .controls #next {
+        font-size: calc(2.7em + 1vw);
     }
 
     .card .controls .play {
-        height: calc(3.7em + 1vw);
+        height: calc(3.4em + 1vw);
     }
 
     .card .controls .play:before {
-        height: calc(2.9em + 1vw);
-        width: calc(2.9em + 1vw);
+        height: calc(2.6em + 1vw);
+        width: calc(2.6em + 1vw);
     }
 }
