@@ -64,7 +64,6 @@ main {
   border-radius: 15px;
   border: 1px solid darkslategrey;
   box-shadow: 0 0 20px black;
-  overflow: hidden;
   backdrop-filter: blur(3px);
 }
 
