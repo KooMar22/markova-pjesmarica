@@ -191,6 +191,18 @@
 
 @media (orientation: portrait) {
     /* Additional layout for portrait mode */
+    .list .header>div span {
+        font-size: calc(1.5em + 1vw)
+    }
+
+    .genre-selector {
+        font-size: calc(1.4em + 1vw);
+    }
+
+    .genre-selector option {
+        font-size: calc(1.5em + 1vw)
+    }
+    
     .list {
         width: 100%;
         background: transparent;
@@ -232,5 +244,17 @@
 
     .list ul {
         height: 50dvh;
+    }
+
+    .list ul li .row span {
+        font-size: calc(.7em + 1vw)
+    }
+
+    .list ul li .row p {
+        font-size: calc(.5em + 1vw)
+    }
+
+    .list .duration {
+        font-size: calc(.7em + 1vw)
     }
 }
