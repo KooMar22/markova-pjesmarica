@@ -208,6 +208,11 @@
         font-size: calc(.75em + 1vw);
     }
 
+    .card .controls {
+        margin-top: 30%;
+        margin-bottom: 20%;
+    }
+
     .card .controls #prev,
     .card .controls #next {
         font-size: calc(2.7em + 1vw);
