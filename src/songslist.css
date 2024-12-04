@@ -247,14 +247,14 @@
     }
 
     .list ul li .row span {
-        font-size: calc(.9em + 1vw);
+        font-size: calc(.8em + 1vw);
     }
 
     .list ul li .row p {
-        font-size: calc(.7em + 1vw);
+        font-size: calc(.6em + 1vw);
     }
 
     .list .duration {
-        font-size: calc(.8em + 1vw);
+        font-size: calc(.7em + 1vw);
     }
 }
