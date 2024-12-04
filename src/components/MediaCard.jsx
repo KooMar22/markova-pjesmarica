@@ -79,7 +79,6 @@ const MediaCard = ({ musicNumber, setMusicNumber, setOpen, songs, open }) => {
                     <i className="material-symbols-outlined"
                         onClick={() => setOpen(prev => !prev)}>queue_music
                     </i>
-                    <span className="tooltip-text">Music List</span>
                 </div>
                 {songs.length > 0 && musicNumber !== null ? (
                     <span>Now Playing {musicNumber + 1} / {songs.length}</span>
