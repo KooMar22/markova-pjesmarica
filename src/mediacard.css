@@ -204,6 +204,10 @@
         font-size: calc(1.05em + 1vw);
     }
 
+    .card .timer {
+        font-size: calc(.75em + 1vw);
+    }
+
     .card .controls #prev,
     .card .controls #next {
         font-size: calc(2.7em + 1vw);
