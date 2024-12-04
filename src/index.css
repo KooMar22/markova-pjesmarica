@@ -81,30 +81,6 @@ ul {
   display: inline-block;
 }
 
-.tooltip-text {
-  visibility: hidden;
-  width: auto;
-  background: transparent;
-  color: white;
-  font-size: 0.7rem;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px;
-  position: absolute;
-  z-index: 1;
-  bottom: -30px;
-  left: 50%;
-  margin-left: -40px;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.icon-container:hover .tooltip-text {
-  visibility: visible;
-  opacity: 1;
-}
-
-
 @media (orientation: landscape) {
   /* Landscape (desktop) layout */
   .container {

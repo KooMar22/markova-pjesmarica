@@ -125,10 +125,6 @@ const MediaCard = ({ musicNumber, setMusicNumber, setOpen, songs, open }) => {
                         {repeat === "autoplay" ? "autoplay" :
                             repeat === "repeat" ? "repeat" : "shuffle"}
                     </i>
-                    <span className="tooltip-text">
-                        {repeat === "autoplay" ? "Normal" :
-                            repeat === "repeat" ? "Repeat" : "Shuffle"}
-                    </span>
                 </div>
                 <i className="material-symbols-outlined" id="prev"
                     onClick={() => handleNextPrev(-1)}>skip_previous</i>
