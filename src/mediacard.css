@@ -1,7 +1,7 @@
 .card {
     width: 100%;
     height: 85dvh;
-    overflow: hidden;
+    overflow-y: auto;
     padding: 25px;
     box-sizing: border-box;
 }
