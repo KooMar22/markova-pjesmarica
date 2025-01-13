@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import MediaCard from "./components/MediaCard";
 import SongsList from "./components/SongsList";
 import Footer from "./components/Footer";
+import Disclaimer from "./components/Disclaimer";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 // import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
@@ -16,28 +17,33 @@ const App = () => {
   const [open, setOpen] = useState(true); 
   // State to store songs from SongsList
   const [songs, setSongs] = useState([]); 
+  // State for disclaimer control
+  const [showDisclaimer, setShowDisclaimer] = useState(true);
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="container">
-        <Header />
-        <main>
-          <MediaCard 
-            musicNumber={musicNumber} 
-            setMusicNumber={setMusicNumber} 
-            setOpen={setOpen} 
-            songs={songs}
-            open={open}
-          />
-          <SongsList 
-            open={open} 
-            musicNumber={musicNumber} 
-            setMusicNumber={setMusicNumber} 
-            setSongs={setSongs} 
-          />
-        </main>
-        <Footer />
-      </div>
+      {showDisclaimer && <Disclaimer onClose={() => setShowDisclaimer(false)} />}
+      {!showDisclaimer && (
+        <div className="container">
+          <Header />
+          <main>
+            <MediaCard
+              musicNumber={musicNumber}
+              setMusicNumber={setMusicNumber}
+              setOpen={setOpen}
+              songs={songs}
+              open={open}
+            />
+            <SongsList
+              open={open}
+              musicNumber={musicNumber}
+              setMusicNumber={setMusicNumber}
+              setSongs={setSongs}
+            />
+          </main>
+          <Footer />
+        </div>
+      )}
       {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>
   );

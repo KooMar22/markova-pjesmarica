@@ -1,0 +1,60 @@
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    } to {
+        opacity: 1;
+    }
+}
+
+.disclaimer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100dvw;
+  height: 100dvh;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.5s ease-in-out;
+  z-index: 30;
+}
+
+.disclaimer-content {
+  width: 65dvw;
+  background-color: rgb(30, 30, 30);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  box-shadow: 12px 12px 15px rgba(255, 255, 255, 0.2);
+}
+
+.disclaimer-content p {
+  margin-bottom: 20px;
+  font-size: calc(0.9em + 1vw);
+}
+
+.disclaimer-content button {
+  padding: 10px 20px;
+  background: linear-gradient(to right, rgb(30, 144, 255), rgb(15, 75, 149));
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: calc(0.7em + 1vw);
+}
+
+.disclaimer-content button:hover {
+  background: linear-gradient(to right, rgba(171, 23, 176, 0.435), rgba(138, 16, 143, 0.435));
+}
+
+@media (orientation: portrait) {
+  .disclaimer-content p {
+    font-size: calc(1.4em + 1vw);
+  }
+
+  .disclaimer-content button {
+    font-size: calc(1.2em + 1vw);
+  }
+}
