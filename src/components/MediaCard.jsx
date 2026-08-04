@@ -142,10 +142,9 @@ const MediaCard = ({ musicNumber, setMusicNumber, setOpen, songs, open }) => {
                 </i>
             </div>
 
-            <audio 
+            <audio
                 src={songFilePath}
                 ref={audioRef}
-                onTimeUpdate={changeCurrentTime}
                 muted={isMuted}
             />
         </div>

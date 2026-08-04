@@ -7,6 +7,7 @@ const useAudioPlayer = (initialVolume = 50, songs, musicNumber, setMusicNumber) 
     const [duration, setDuration] = useState(0);
     const [repeat, setRepeat] = useState("autoplay");
     const audioRef = useRef(null);
+    const retryTimeoutRef = useRef(null);
 
     // Update audio volume whenever it changes
     useEffect(() => {
@@ -55,18 +56,33 @@ const useAudioPlayer = (initialVolume = 50, songs, musicNumber, setMusicNumber) 
                 }
             };
 
+            const handleError = () => {
+                // Loading can silently fail on a flaky connection (no "loadedmetadata",
+                // no playback). Instead of getting stuck, keep retrying the same song
+                // until a load eventually succeeds.
+                retryTimeoutRef.current = setTimeout(() => {
+                    audioRef.current.load();
+                    if (play) {
+                        audioRef.current.play().catch(() => {});
+                    }
+                }, 3000);
+            };
+
             audioRef.current.addEventListener("loadedmetadata", handleLoadedMetadata);
             audioRef.current.addEventListener("timeupdate", handleTimeUpdate);
             audioRef.current.addEventListener("ended", handleEnded);
+            audioRef.current.addEventListener("error", handleError);
 
             if (play) {
-                audioRef.current.play();
+                audioRef.current.play().catch(() => {});
             }
 
             return () => {
+                clearTimeout(retryTimeoutRef.current);
                 audioRef.current.pause();
                 audioRef.current.removeEventListener("loadedmetadata", handleLoadedMetadata);
                 audioRef.current.removeEventListener("timeupdate", handleTimeUpdate);
+                audioRef.current.removeEventListener("error", handleError);
                 // eslint-disable-next-line react-hooks/exhaustive-deps
                 audioRef.current.removeEventListener("ended", handleEnded);
             };
