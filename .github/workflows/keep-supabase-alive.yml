@@ -1,0 +1,22 @@
+name: Keep Supabase project alive
+
+on:
+  schedule:
+    # Runs at 06:00 UTC every 4 days. Supabase free-tier projects pause after
+    # ~7 days without any API activity, so this stays well under that window.
+    - cron: "0 6 */4 * *"
+  workflow_dispatch: {}
+
+jobs:
+  ping-supabase:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Query the genres table to register activity
+        run: |
+          curl --fail --silent --show-error \
+            "$SUPABASE_URL/rest/v1/genres?select=id&limit=1" \
+            -H "apikey: $SUPABASE_ANON_KEY" \
+            -H "Authorization: Bearer $SUPABASE_ANON_KEY"
+        env:
+          SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
