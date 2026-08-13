@@ -2,9 +2,10 @@ name: Keep Supabase project alive
 
 on:
   schedule:
-    # Runs at 06:00 UTC every 4 days. Supabase free-tier projects pause after
-    # ~7 days without any API activity, so this stays well under that window.
-    - cron: "0 6 */4 * *"
+    # Runs at 06:00 UTC every day. Supabase free-tier projects pause after
+    # ~7 days without enough activity; pinging every 4 days still wasn't
+    # enough in practice, so this gives a much bigger safety margin.
+    - cron: "0 6 * * *"
   workflow_dispatch: {}
 
 jobs:
