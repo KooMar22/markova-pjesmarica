@@ -2,9 +2,9 @@ name: Keep Supabase project alive
 
 on:
   schedule:
-    # Runs at 06:00 UTC every day. Supabase free-tier projects pause after
-    # ~7 days without enough activity; pinging every 4 days still wasn't
-    # enough in practice, so this gives a much bigger safety margin.
+    # Runs at 06:00 UTC every day. A plain GET was likely being served from
+    # cache and never actually reaching the database, so this writes a fresh
+    # timestamp instead - writes can't be cached, guaranteeing real activity.
     - cron: "0 6 * * *"
   workflow_dispatch: {}
 
@@ -12,12 +12,15 @@ jobs:
   ping-supabase:
     runs-on: ubuntu-latest
     steps:
-      - name: Query the genres table to register activity
+      - name: Update heartbeat row to register real (uncached) database activity
         run: |
-          curl --fail --silent --show-error \
-            "$SUPABASE_URL/rest/v1/genres?select=id&limit=1" \
+          curl --fail --silent --show-error -X PATCH \
+            "$SUPABASE_URL/rest/v1/keep_alive?id=eq.1" \
             -H "apikey: $SUPABASE_ANON_KEY" \
-            -H "Authorization: Bearer $SUPABASE_ANON_KEY"
+            -H "Authorization: Bearer $SUPABASE_ANON_KEY" \
+            -H "Content-Type: application/json" \
+            -H "Prefer: return=minimal" \
+            -d "{\"pinged_at\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\"}"
         env:
           SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
